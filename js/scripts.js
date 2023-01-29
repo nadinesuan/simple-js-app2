@@ -1,5 +1,5 @@
 let pokemonRepository = (function () {
-    let pokemonRepository= [
+    let pokemonRepository = [
     { name: "Bulbasaur", height: 0.7, types: ['grass', 'poison'] },
     { name: "Charizard", height: 1.7, types: 'fire'},
     { name: "Squirtle", height: 0.5, types: 'water'},
@@ -30,7 +30,7 @@ if (pokemonList[i].height >= 1.0) {
 */
 
 //replacing for loop with forEach loop
-pokemonRepository.forEach(function(pokemon) {
+pokemonRepository.getAll().forEach(function(pokemon) {
     if (pokemon.height >= 1.0) {
         document.write(pokemon.name + " (height: " + pokemon.height + "m) - Wow, that's a big pokemon!" + "<br>");
     } else if (pokemon.height >= 0.7 && pokemon.height < 1.0) {
