@@ -11,7 +11,7 @@ function add(pokemon) {
 }
 
 function getAll() {
-    return pokemonRepository;
+    return pokemonList;
 }
 
 function addListItem (pokemon) {
