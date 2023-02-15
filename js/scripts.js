@@ -1,10 +1,10 @@
 let pokemonRepository = (function () {
-    let pokemonRepository = [
+    let pokemonList = [
     { name: "Bulbasaur", height: 0.7, types: ['grass', 'poison'] },
     { name: "Charizard", height: 1.7, types: 'fire'},
     { name: "Squirtle", height: 0.5, types: 'water'},
-    { name: "Wigglytuff", height: 1, types: 'fairy'}
-];
+    { name: "Wigglytuff", height: 1, types: 'fairy'},
+]
 
 function add(pokemon) {
     pokemonRepository.push(pokemon);
@@ -14,32 +14,27 @@ function getAll() {
     return pokemonRepository;
 }
 
+function addListItem (pokemon) {
+let pokemonRepository = document.querySelector('.pokemon-List'); 
+    let listPokemon = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add("button-class");
+    listPokemon.appendChild(listPokemon);
+    button.addEventListener("click", (Event) => showDetails(pokemon));
+}
+
+function showDetails (pokemon) {
+    console.log(pokemon);
+}
+
 return {
-    add:add,
-    getAll:getAll
-};
+    add: add,
+    getAll: getAll,
+    addListItem: addListItem,
+    };
 })();
 
-/* before the forEach loop
-for (let i=0; i < pokemonList.length; i++) {
-    document.write("<p>" + pokemonList[i].name + " (height: " + pokemonList[i].height + ")")
-if (pokemonList[i].height >= 1.0) {
-    document.write("<p>" + pokemonList[i].name + " (height: " + pokemonList[i].height + ")" + " - Wow, that's a big pokemon!");
-    }
-}
-*/
-
-//replacing for loop with forEach loop
-pokemonRepository.getAll().forEach(function(pokemon) {
-    if (pokemon.height >= 1.0) {
-        document.write(pokemon.name + " (height: " + pokemon.height + "m) - Wow, that's a big pokemon!" + "<br>");
-    } else if (pokemon.height >= 0.7 && pokemon.height < 1.0) {
-        document.write(pokemon.name + " (height: " + pokemon.height + "m) - Wow, that's a medium pokemon!" + "<br>");
-    } else { 
-        document.write(pokemon.name + " (height: " + pokemon.height + "m) - Wow, that's a small pokemon!" + "<br>");
-    }
-});
-
-pokemonRepository.getAll().forEach(function(pokemon) {
-    document.write(pokemon.name + pokemon.height);
+pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
 });
