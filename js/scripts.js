@@ -15,12 +15,13 @@ function getAll() {
 }
 
 function addListItem (pokemon) {
-let pokemonRepository = document.querySelector('.pokemon-List'); 
+let pokemonList = document.querySelector('.pokemon-List'); 
     let listPokemon = document.createElement('li');
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     button.classList.add("button-class");
-    listPokemon.appendChild(listPokemon);
+    listPokemon.appendChild(button);
+    pokemonList.appendChild(listPokemon);
     button.addEventListener("click", (Event) => showDetails(pokemon));
 }
 
