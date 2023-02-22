@@ -2,7 +2,11 @@ let pokemonRepository = (function () {
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/';
 
-function add(pokemon) {
+    function getAll() {
+        return pokemonList
+    }
+
+    function add(pokemon) {
     if (
         typeof pokemon === "object" &&
         "name" in pokemon
@@ -14,7 +18,7 @@ function add(pokemon) {
 }
 
 function addListItem (pokemon) {
-let pokemonList = document.querySelector(".pokemon-list"); 
+    let pokemonList = document.querySelector(".pokemon-List");
     let listPokemon = document.createElement('li');
     let button = document.createElement('button');
     button.innerText = pokemon.name;
