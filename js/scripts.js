@@ -63,7 +63,63 @@ function loadDetails(item) {
 function showDetails (item) {
     pokemonRepository.loadDetails(item).then (function () {
         console.log(item);
+        let modalContainer = document.querySelector ('#modal-container');
+
+            modalContainer.innerHTML = '';
+
+            let modal = document.createElement('div');
+            modal.classList.add ('modal');
+
+            let sprite = document.createElement('img');
+            sprite.classList.add ('sprite');
+            sprite.src = item.imageUrl;
+
+            let closeButtonElement = document.createElement ('button');
+            closeButtonElement.classList.add('modal-close');
+            closeButtonElement.innerText = 'X';
+            closeButtonElement.addEventListener ('click', hideModal)
+
+            let titleElement = document.createElement ('h1');
+            titleElement.innerText = (item.name);
+
+            let contentElement = document.createElement ('p');
+            contentElement.innerText = ('Height: ' + item.height + '\n' + '\n' + 'Types: ' + item.types);
+
+
+
+            modal.appendChild (closeButtonElement);
+            modal.appendChild (titleElement);
+            modal.appendChild (contentElement);
+            modalContainer.appendChild (modal);
+            modal.appendChild (sprite);
+
+
+            modalContainer.classList.add('is-visible');
+
+
+        function hideModal (){
+            modalContainer.classList.remove ('is-visible');
+        }
+
+        window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')){
+            hideModal();
+        }  
+        });
+
+        modalContainer.addEventListener('click', (e) => {
+            let target = e.target;
+            if (target === modalContainer) {
+                hideModal();
+            }
+        });
+
+        document.querySelector ('button.button-class').addEventListener('click', () => {
+            showDetails ('Modal Title', 'Modal Content');
+        });
+
     });
+
 }
 
 return {
@@ -72,7 +128,7 @@ return {
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails,
-    showDetails: showDetails
+    showDetails: showDetails,
     };
 })();
 
