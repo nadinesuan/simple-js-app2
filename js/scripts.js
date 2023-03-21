@@ -31,7 +31,8 @@ function addListItem (pokemon) {
     pokemonList.appendChild(listPokemon);
     button.addEventListener("click", function(Event) {
         showDetails(pokemon);
-    });
+    })
+}
 
 function loadList() {
     return fetch(apiUrl).then (function (response) {
@@ -82,7 +83,8 @@ function showModal (item) {
         });
         let pokemonTypes = document.querySelector('.pokemon-types');
         pokemonTypes.innerHTML = itemTypes;
-    
+    });
+    }
 return {
     add: add,
     getAll: getAll,
