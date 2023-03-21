@@ -13,23 +13,25 @@ let pokemonRepository = (function () {
     ) {
         pokemonList.push(pokemon);
     } else {
-
+        console.log('Invalid Pokémon');
     }
 }
 
 function addListItem (pokemon) {
     let pokemonList = document.querySelector(".pokemon-List");
     let listPokemon = document.createElement('li');
+    pokemonList.classList.add('list-group-item');
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     button.classList.add("button-class");
+    pokemonButton.classList.add('btn');
+    pokemonButton.setAttribute('data-toggle', 'modal');
+    pokemonButton.setAttribute('data-target', '#pokemonModal');
     listPokemon.appendChild(button);
     pokemonList.appendChild(listPokemon);
-    button.addEventListener("click",
-    function(Event) {
+    button.addEventListener("click", function(Event) {
         showDetails(pokemon);
     });
-}
 
 function loadList() {
     return fetch(apiUrl).then (function (response) {
@@ -60,68 +62,27 @@ function loadDetails(item) {
     });
 }
 
-function showDetails (item) {
+function showModal (item) {
     pokemonRepository.loadDetails(item).then (function () {
-        console.log(item);
-        let modalContainer = document.querySelector ('#modal-container');
+        
+        let pokemonImage = document.querySelector ('pokemon-image');
 
-            modalContainer.innerHTML = '';
+        let pokemonId = document.querySelector('pokemon-id');
+        pokemonId.innerText = '#' + item.id;
 
-            let modal = document.createElement('div');
-            modal.classList.add ('modal');
+        let pokemonName = document.querySelector('.pokemon-name');
+        pokemonName.innerText = item.name;
 
-            let sprite = document.createElement('img');
-            sprite.classList.add ('sprite');
-            sprite.src = item.imageUrl;
+        let pokemonHeight = document.querySelector('.pokemon-height');
+        pokemonHeight.innerText = '> ' + (item.height/10) + ' m';
 
-            let closeButtonElement = document.createElement ('button');
-            closeButtonElement.classList.add('modal-close');
-            closeButtonElement.innerText = 'X';
-            closeButtonElement.addEventListener ('click', hideModal)
-
-            let titleElement = document.createElement ('h1');
-            titleElement.innerText = (item.name);
-
-            let contentElement = document.createElement ('p');
-            contentElement.innerText = ('Height: ' + item.height + '\n' + '\n' + 'Types: ' + item.types);
-
-
-
-            modal.appendChild (closeButtonElement);
-            modal.appendChild (titleElement);
-            modal.appendChild (contentElement);
-            modalContainer.appendChild (modal);
-            modal.appendChild (sprite);
-
-
-            modalContainer.classList.add('is-visible');
-
-
-        function hideModal (){
-            modalContainer.classList.remove ('is-visible');
-        }
-
-        window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')){
-            hideModal();
-        }  
+        let itemTypes = "";
+        item.types.forEach(function(types) {
+            itemTypes += ["<li>" + types.type.name + "</li>"];
         });
-
-        modalContainer.addEventListener('click', (e) => {
-            let target = e.target;
-            if (target === modalContainer) {
-                hideModal();
-            }
-        });
-
-        document.querySelector ('button.button-class').addEventListener('click', () => {
-            showDetails ('Modal Title', 'Modal Content');
-        });
-
-    });
-
-}
-
+        let pokemonTypes = document.querySelector('.pokemon-types');
+        pokemonTypes.innerHTML = itemTypes;
+    
 return {
     add: add,
     getAll: getAll,
@@ -134,6 +95,6 @@ return {
 
 pokemonRepository.loadList().then(function() {
     pokemonRepository.getAll().forEach(function(pokemon){
-        pokemonRepository.addListItem(pokemon);
+        pokemonRepository.addListItem(pokemon)
     });
 });
