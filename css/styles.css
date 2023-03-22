@@ -1,34 +1,91 @@
 body {
-    color: rgb(73, 92, 231);
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color:rgb(184, 76, 51);
+    font-family: 'Bebas Neue', bold;
+    font-size: 25px;
+}
+
+header {
+    background-color: transparent;
+
+}
+
+.navbar-brand {
+    font-family: 'Delicious Handrawn', bold;
+    font-size: 1.3em;
+    color: black;
+    letter-spacing: 0.1em;
+}
+
+.pokemon-search {
+    border-radius: 0;
+    background-color: transparent;
+    border: 3px solid rgb(36, 53, 206);
+    color: var(--black);
+}
+
+.pokemon-search::placeholder {
+    color: rgb(239, 239, 14);
+    opacity: 1;
+    font-style: bold;
+}
+
+.logo {
+    z-index: 99;
+    width: 40%;
+    min-width: 200px;
+    max-width: 550px;
+    align-items: center;
+    
 }
 
 .pokemon-button {
-    color: rgb(169, 207, 218);
-    display: inline-block;
-    text-transform: capitalize;
-    text-align: center;
-    line-height: 1.5em;
-    padding: 10px;
-    margin: 10px 0px;
-    width: 200px;
-    font-size: 18px;
-    background: #b7aeae;
-    border-radius: 25px;
-    font-weight: 700;
+    width: 100px;
+    border: 5px solid var(--black);
+    border-radius: 0;
+    box-shadow: 5px 5px var(--black);
+    padding: 30px;
+    font-size: 1em;
+    background: rgb(239, 239, 14);
     box-shadow: 5px 5px 0px 0px #000;
-    border-color:rgb(77, 114, 150);
+    border-color:black;
 }
 
 li.list-group-item{
     padding:0;
     border: none;
+    justify-content: center;
 }
 
 footer a {
     color:fff;
     text-decoration: underline;
 }
+
+@media all and (max-width: 1080px) {
+
+    .pokemon-list{
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+}
+
+@media all and (max-width: 576px) {
+
+    body {
+        font-size: 22px;
+    }
+
+    .pokemon-list{
+        flex-direction: column;
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .pokemon-button {
+        padding: 20px;
+    }
+}
+
 
 .modal {
     display: none;
